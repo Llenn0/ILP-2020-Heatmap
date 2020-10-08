@@ -46,7 +46,7 @@ public class App
 	        for(int line = 0; line < 10; line++) {
 	            String[] predictionStrings = (reader.nextLine()).split(","); // Split current line into 10 strings, then advance
 	            for(int i = 0; i < predictionStrings.length; i++) {
-	            	predictions[line][i] = Integer.parseInt(predictionStrings[i].strip()); // Strip whitespace then convert to an integer
+	            	predictions[line][i] = Integer.parseInt(predictionStrings[i].strip()); // Strip whitespace then convert to an integer and append to array
 	            }
 	        }
 		} catch (FileNotFoundException e) { // If the given path does not lead to a file, throw an error
@@ -76,7 +76,7 @@ public class App
             	Polygon polygon = Polygon.fromLngLats(List.of(coords));
             	Feature feature = Feature.fromGeometry((Geometry) polygon);
             	feature.addNumberProperty("fill-opacity", 0.75);
-            	String rgb = getRGBFromPredictions(predictions[9-j][i]);
+            	String rgb = getRGBFromReading(predictions[9-j][i]);
             	feature.addStringProperty("rgb-string", rgb);
             	feature.addStringProperty("fill", rgb);
             	featureList.add(feature);
@@ -86,7 +86,7 @@ public class App
 	}
 	
 	// Assign the correct RGB colour using the prediction
-	private static String getRGBFromPredictions(int prediction) {
+	private static String getRGBFromReading(int prediction) {
 		if(inRange(prediction, 0, 32)) {
 			return "#00ff00";
 		} else if(inRange(prediction, 32, 64)) {

@@ -47,7 +47,14 @@
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
+          <version>3.8.1</version>
+          <configuration>
+			<release>11</release>
+		    <showWarnings>true</showWarnings>
+			<compilerArgs>
+			  <arg>-Xlint:all,-classfile</arg>
+			</compilerArgs>
+		  </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
@@ -55,7 +62,15 @@
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
+          <version>3.2.0</version>
+          <configuration>
+		    <archive>
+			  <index>true</index>
+			  <manifest>
+				<mainClass>uk.ac.ed.inf.heatmap.App</mainClass>
+			  </manifest>
+			</archive>
+		  </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
@@ -74,6 +89,20 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+        <plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-shade-plugin</artifactId>
+		  <version>3.2.4</version>
+		  <executions>
+		    <execution>
+		      <phase>package</phase>
+		      <goals>
+		        <goal>shade</goal>
+			  </goals>
+		    </execution>
+		  </executions>
+		</plugin>
+        
       </plugins>
     </pluginManagement>
   </build>
